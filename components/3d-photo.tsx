@@ -55,6 +55,11 @@ function Card() {
     metalness: 0.9,
   })
 
+  // Responsive scaling
+  const { viewport } = useThree()
+  const isMobile = viewport.width < 8 // 8 units is roughly mobile breakpoint in this camera setup
+  const scaleFactor = isMobile ? 0.65 : 1
+
   return (
     <Float
       speed={hovered ? 0 : 2} // Stop floating when interacting
@@ -62,46 +67,48 @@ function Card() {
       floatIntensity={0.5}
       floatingRange={[-0.05, 0.05]}
     >
-      <mesh
-        ref={meshRef}
-        onPointerOver={() => setHover(true)}
-        onPointerOut={() => setHover(false)}
-      >
-        {/* Card Shape: Width 3.2, Height 4.5, Thickness 0.1 */}
-        {/* Added extra segments for better lighting on rounded corners if we had them, standard box is fine here */}
-        <boxGeometry args={[3.2, 4.5, 0.1]} />
+      <group scale={scaleFactor}>
+        <mesh
+          ref={meshRef}
+          onPointerOver={() => setHover(true)}
+          onPointerOut={() => setHover(false)}
+        >
+          {/* Card Shape: Width 3.2, Height 4.5, Thickness 0.1 */}
+          {/* Added extra segments for better lighting on rounded corners if we had them, standard box is fine here */}
+          <boxGeometry args={[3.2, 4.5, 0.1]} />
 
-        {/* Materials for 6 sides */}
-        <primitive object={sideMaterial} attach="material-0" /> {/* Right */}
-        <primitive object={sideMaterial} attach="material-1" /> {/* Left */}
-        <primitive object={sideMaterial} attach="material-2" /> {/* Top */}
-        <primitive object={sideMaterial} attach="material-3" /> {/* Bottom */}
+          {/* Materials for 6 sides */}
+          <primitive object={sideMaterial} attach="material-0" /> {/* Right */}
+          <primitive object={sideMaterial} attach="material-1" /> {/* Left */}
+          <primitive object={sideMaterial} attach="material-2" /> {/* Top */}
+          <primitive object={sideMaterial} attach="material-3" /> {/* Bottom */}
 
-        {/* Front - High Quality Photo (Unlit for true colors) */}
-        <meshBasicMaterial
-          attach="material-4"
-          map={texture}
-          toneMapped={false}
-        />
-
-        {/* Back - Dark Metal */}
-        <primitive object={sideMaterial} attach="material-5" />
-      </mesh>
-
-      {/* Sheen/Glare Effect - Only visible on hover/tilt */}
-      {hovered && (
-        <mesh position={[0, 0, 0.06]} scale={[3.2, 4.5, 1]} rotation={[0, 0, 0]}>
-          <planeGeometry />
+          {/* Front - High Quality Photo (Unlit for true colors) */}
           <meshBasicMaterial
-            color="white"
-            opacity={0.1}
-            transparent
-            blending={THREE.AdditiveBlending}
-            side={THREE.DoubleSide}
-            depthWrite={false}
+            attach="material-4"
+            map={texture}
+            toneMapped={false}
           />
+
+          {/* Back - Dark Metal */}
+          <primitive object={sideMaterial} attach="material-5" />
         </mesh>
-      )}
+
+        {/* Sheen/Glare Effect - Only visible on hover/tilt */}
+        {hovered && (
+          <mesh position={[0, 0, 0.06]} scale={[3.2, 4.5, 1]} rotation={[0, 0, 0]}>
+            <planeGeometry />
+            <meshBasicMaterial
+              color="white"
+              opacity={0.1}
+              transparent
+              blending={THREE.AdditiveBlending}
+              side={THREE.DoubleSide}
+              depthWrite={false}
+            />
+          </mesh>
+        )}
+      </group>
     </Float>
   )
 }

@@ -56,9 +56,9 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center flex-col-reverse lg:flex-row">
         {/* Text Content */}
-        <div className={`space-y-8 ${mounted ? "opacity-100" : "opacity-0"}`}>
+        <div className={`space-y-6 md:space-y-8 ${mounted ? "opacity-100" : "opacity-0"} text-center lg:text-left pt-8 lg:pt-0`}>
           {/* Badge */}
           <ScrollReveal direction="up" delay={100}>
             <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full animate-pulse-glow">
@@ -69,7 +69,7 @@ export function HeroSection() {
 
           {/* Main Heading with character reveal */}
           <ScrollReveal direction="up" delay={200}>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-7xl font-bold leading-tight">
               <span className="text-white font-outfit">Hi, I&apos;m</span>{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 font-outfit font-extrabold tracking-tight">
                 Nandala Nithin
@@ -88,7 +88,7 @@ export function HeroSection() {
 
           {/* Description */}
           <ScrollReveal direction="up" delay={400}>
-            <p className="text-lg text-gray-400 max-w-xl leading-relaxed">
+            <p className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed mx-auto lg:mx-0">
               Full Stack Developer building scalable web applications powered by AI. I create intelligent, production-ready digital experiences from frontend to backend.
             </p>
           </ScrollReveal>
@@ -108,7 +108,7 @@ export function HeroSection() {
           </ScrollReveal>
         </div>
 
-        <ScrollReveal direction="right" delay={300} className="relative h-96 lg:h-[500px] w-full flex items-center justify-center">
+        <ScrollReveal direction="right" delay={300} className="relative h-[450px] md:h-[500px] w-full flex items-center justify-center order-first lg:order-last">
           <ThreeDPhoto />
         </ScrollReveal>
       </div>
