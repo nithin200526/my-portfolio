@@ -5,7 +5,6 @@ import { ChevronDown, Sparkles } from "lucide-react"
 import { ScrollReveal } from "./scroll-reveal"
 import { TextReveal } from "./text-reveal"
 import { MagneticButton } from "./magnetic-button"
-import { ThreeDPhoto } from "./3d-photo"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
@@ -56,9 +55,9 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center flex-col-reverse lg:flex-row">
+      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
-        <div className={`space-y-6 md:space-y-8 ${mounted ? "opacity-100" : "opacity-0"} text-center lg:text-left pt-8 lg:pt-0`}>
+        <div className={`space-y-8 ${mounted ? "opacity-100" : "opacity-0"}`}>
           {/* Badge */}
           <ScrollReveal direction="up" delay={100}>
             <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full animate-pulse-glow">
@@ -69,26 +68,20 @@ export function HeroSection() {
 
           {/* Main Heading with character reveal */}
           <ScrollReveal direction="up" delay={200}>
-            <h1 className="text-4xl md:text-7xl font-bold leading-tight">
-              <span className="text-white font-outfit">Hi, I&apos;m</span>{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 font-outfit font-extrabold tracking-tight">
-                Nandala Nithin
-              </span>
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+              <span className="text-white">Hi, I&apos;m</span>{" "}
+              <span className="text-gradient">Nandala Nithin</span>
               <br />
-              <span className="text-white font-outfit">I build </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-outfit font-bold">
-                AI-powered
-              </span>
+              <span className="text-white">I build </span>
+              <span className="text-gradient">AI-powered</span>
               <br />
-              <span className="font-playfair italic text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-purple-200 animate-gradient-x">
-                experiences
-              </span>
+              <span className="text-gradient">experiences</span>
             </h1>
           </ScrollReveal>
 
           {/* Description */}
           <ScrollReveal direction="up" delay={400}>
-            <p className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed mx-auto lg:mx-0">
+            <p className="text-lg text-gray-400 max-w-xl leading-relaxed">
               Full Stack Developer building scalable web applications powered by AI. I create intelligent, production-ready digital experiences from frontend to backend.
             </p>
           </ScrollReveal>
@@ -108,8 +101,43 @@ export function HeroSection() {
           </ScrollReveal>
         </div>
 
-        <ScrollReveal direction="right" delay={300} className="relative h-[450px] md:h-[500px] w-full flex items-center justify-center order-first lg:order-last">
-          <ThreeDPhoto />
+        <ScrollReveal direction="right" delay={300} className="relative h-96 lg:h-[500px]">
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Central orb */}
+            <div
+              className="relative w-64 h-64 md:w-80 md:h-80"
+              style={{
+                transform: `translate(${mousePos.x * -20}px, ${mousePos.y * -20}px)`,
+                transition: "transform 0.4s ease-out",
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-cyan-500/30 rounded-full blur-2xl animate-pulse-glow" />
+              <div className="absolute inset-4 glass rounded-full animate-rotate-slow" />
+
+              {/* Floating tech icons with enhanced hover effects */}
+              {[
+                { emoji: "⚛️", pos: "absolute -top-8 left-1/2 -translate-x-1/2", delay: 0 },
+                { emoji: "🔷", pos: "absolute top-1/4 -right-8", delay: 100 },
+                { emoji: "🌐", pos: "absolute bottom-1/4 -right-4", delay: 200 },
+                { emoji: "🚀", pos: "absolute -bottom-8 left-1/2 -translate-x-1/2", delay: 300 },
+                { emoji: "💻", pos: "absolute top-1/4 -left-8", delay: 400 },
+                { emoji: "🎨", pos: "absolute bottom-1/4 -left-4", delay: 500 },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className={`${item.pos} animate-float`}
+                  style={{
+                    animationDelay: `${item.delay}ms`,
+                    transform: `translate(${mousePos.x * (10 + index * 5)}px, ${mousePos.y * (10 + index * 5)}px)`,
+                  }}
+                >
+                  <div className="glass p-4 rounded-xl hover:scale-125 hover:bg-purple-500/30 transition-all duration-300 cursor-pointer">
+                    <span className="text-3xl">{item.emoji}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </ScrollReveal>
       </div>
 
