@@ -7,37 +7,40 @@ import { useState } from "react"
 
 const projects = [
   {
-    title: "PIRATE CODEZ Portfolio",
+    title: "MEDILENS: AI-Powered Lab Report Intelligence",
     description:
-      "My original portfolio website showcasing my journey as a developer. Built with modern technologies featuring smooth animations, responsive design, and an immersive user experience.",
-    image: "/dark-portfolio-website-with-purple-neon-accents-cy.jpg",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
+      "An AI system that extracts and analyzes lab reports to generate structured health insights. Implements RAG-based explanation pipelines with deterministic validation to reduce hallucinations, and a risk-aware triage engine to classify abnormal parameters and prioritize critical findings.",
+    image: "/medilens-cover.png",
+    tags: ["Python", "RAG", "LLM", "FastAPI", "Healthcare AI"],
     gradient: "from-purple-600 to-pink-600",
-    link: "https://piratexportfolio.vercel.app",
-    icon: Code2,
-    features: ["Responsive Design", "Dark Theme", "Smooth Animations"],
-  },
-  {
-    title: "OSINT X FLEX",
-    description:
-      "A comprehensive Open Source Intelligence (OSINT) platform designed for security researchers and investigators. Features powerful search capabilities and data aggregation tools.",
-    image: "/osint-cybersecurity-dashboard-dark-theme-hacker-st.jpg",
-    tags: ["React", "Python", "API Integration", "Security"],
-    gradient: "from-cyan-600 to-blue-600",
-    link: "https://osintxflex.vercel.app",
+    github: "https://github.com/nithin200526/medilens-health-intelligence",
+    link: "https://github.com/nithin200526/medilens-health-intelligence",
     icon: Shield,
-    features: ["Data Aggregation", "Search Tools", "Security Focused"],
+    features: ["Lab Report Analysis", "RAG Pipelines", "Risk Triage Engine"],
   },
   {
-    title: "CyberVault Blog",
+    title: "RECALL: Context-Aware Relationship Intelligence",
     description:
-      "A tech blog platform where I share insights on cybersecurity, web development, and emerging technologies. Features a clean reading experience with code syntax highlighting.",
-    image: "/tech-blog-website-dark-theme-code-snippets-cyberse.jpg",
-    tags: ["Next.js", "MDX", "Tailwind", "Vercel"],
+      "An AI-powered relationship management platform that passively analyzes Gmail conversations. Implements semantic memory and AI reasoning to recall past discussions and pending follow-ups, and a proactive assistant that generates intelligent nudges and context-aware email drafts.",
+    image: "/recall-cover.png",
+    tags: ["Python", "Gmail API", "LLM", "Semantic Memory", "AI"],
+    gradient: "from-cyan-600 to-blue-600",
+    github: "https://github.com/jithendra-10/Recall-main",
+    link: "https://github.com/jithendra-10/Recall-main",
+    icon: Code2,
+    features: ["Gmail Analysis", "Semantic Memory", "AI Nudges"],
+  },
+  {
+    title: "DreamWell: AI Dream Interpreter & Mood Tracker",
+    description:
+      "An AI-powered dream interpretation and mood tracking application for better mental wellness. Features intelligent dream analysis, mood pattern tracking, and personalized insights to help users understand their subconscious mind and emotional health trends.",
+    image: "/dreamwell-cover.png",
+    tags: ["React", "Node.js", "AI", "Docker", "MongoDB"],
     gradient: "from-emerald-600 to-teal-600",
-    link: "#",
+    github: "https://github.com/nithin200526/DreamWell",
+    link: "https://github.com/nithin200526/DreamWell",
     icon: Globe,
-    features: ["Tech Articles", "Code Tutorials", "Security Tips"],
+    features: ["Dream Interpretation", "Mood Tracking", "AI Insights"],
   },
 ]
 
@@ -86,24 +89,21 @@ export function ProjectsSection() {
                 <div className="relative glass-strong rounded-3xl overflow-hidden transition-all duration-700 hover:scale-[1.01] hover:-translate-y-2 border border-white/5 group-hover:border-purple-500/30">
                   <div className="grid md:grid-cols-2 gap-0">
                     {/* Image with enhanced effects */}
-                    <div className={`relative h-72 md:h-96 overflow-hidden ${index % 2 === 1 ? "md:order-2" : ""}`}>
-                      {/* Gradient overlay */}
+                    <div className={`relative h-72 md:h-full min-h-[300px] bg-black/20 p-4 md:p-8 overflow-hidden flex items-center justify-center ${index % 2 === 1 ? "md:order-2" : ""}`}>
+                      {/* Gradient overlay - heavily reduced for clarity */}
                       <div
-                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-40 transition-all duration-700`}
+                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-all duration-700 pointer-events-none`}
                       />
 
                       {/* Image */}
                       <img
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-1"
+                        className="w-full h-full object-contain transition-all duration-1000 group-hover:scale-105 rounded-lg shadow-2xl"
                       />
 
-                      {/* Bottom gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-80" />
-
                       {/* Animated scan line */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-scan" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-scan pointer-events-none" />
 
                       {/* Project icon */}
                       <div className="absolute top-4 left-4">
@@ -168,10 +168,15 @@ export function ProjectsSection() {
                           </a>
                         </MagneticButton>
                         <MagneticButton>
-                          <button className="flex items-center gap-2 px-6 py-4 glass rounded-xl text-white hover:bg-cyan-500/20 transition-all duration-300 group/btn border border-cyan-500/20 hover:border-cyan-500/40">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-6 py-4 glass rounded-xl text-white hover:bg-cyan-500/20 transition-all duration-300 group/btn border border-cyan-500/20 hover:border-cyan-500/40"
+                          >
                             <Github className="w-5 h-5 group-hover/btn:rotate-12 transition-transform duration-300" />
                             <span>Code</span>
-                          </button>
+                          </a>
                         </MagneticButton>
                       </div>
                     </div>
